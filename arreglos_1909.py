@@ -1,10 +1,4 @@
-# Actividad en clase 19/09
-# Saber si un alumno esta regular usando arreglos, registros y funciones.
-#
-# Regla usada:
-# - tiene que tener las 4 notas
-# - el promedio tiene que ser mayor o igual a 6
-# - la asistencia tiene que ser mayor o igual a 75
+
 
 PROMEDIO_MINIMO = 6
 ASISTENCIA_MINIMA = 75
