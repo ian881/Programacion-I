@@ -152,4 +152,3 @@ Descarté la lista de ventas sueltas. Sirve para guardar el historial de cada an
 
 La matriz por código hace fáciles los totales por fila y por columna, y dos ventas del mismo producto el mismo día se suman solas. El límite aparece si el buffet abre los sábados: la lista deja de tener 5 posiciones y hay que tocar el alta, los archivos y los informes. Si agregan un producto a mitad de semana, el programa ya lo permite: se suma un registro y una fila de ceros, y no se pierden las ventas anteriores.
 
-Para entregar, completar nombre y DNI y pegar capturas de estas pruebas.
