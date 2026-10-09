@@ -23,4 +23,3 @@ python3 buffet.py
 
 En la actividad del 19/09 un alumno está regular si el promedio de las 4 notas es mayor o igual a 6 y la asistencia es mayor o igual a 75%.
 
-## Invitar al profesor
