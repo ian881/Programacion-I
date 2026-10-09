@@ -1,6 +1,4 @@
-# Gestion de torneo - Actividad 02
-# Continua la actividad 01 y guarda los datos en archivos de texto
-# para que no se pierdan al cerrar el programa.
+
 
 ARCHIVO_JUGADORES = "inscriptos.txt"
 ARCHIVO_PAREJAS = "parejas.txt"
