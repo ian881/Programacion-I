@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+inscriptos.txt
+parejas.txt
+productos.txt
+ventas.txt
