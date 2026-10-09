@@ -2,8 +2,8 @@
 
 Programación I · Práctica de estructuras de datos
 
-Nombre y apellido: completar  
-DNI: completar  
+Nombre y apellido: Herrera  
+DNI: 45098991  
 Fecha: 9 de octubre de 2026
 
 ## 1. Problema y elección de estructuras
