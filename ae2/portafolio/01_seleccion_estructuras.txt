@@ -1,5 +1,0 @@
-Selección de estructuras, antes del diseño.
-
-El catálogo va en una lista de registros, porque cada producto tiene código, nombre y precio juntos.
-Las ventas van en una matriz: cada fila es un producto y cada columna es un día, para sumar fácil un producto o un día.
-Los dos se guardan en archivos. Si quedan solo en memoria, al cerrar el programa se pierde la semana.
