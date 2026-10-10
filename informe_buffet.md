@@ -1,154 +1,84 @@
-# El buffet de la Facultad
+El buffet de la Facultad
 
-Programación I · Práctica de estructuras de datos
+Programación I
+Actividad de Evaluación N.º 2
 
-Nombre y apellido: Herrera  
-DNI: 45098991  
-Fecha: 9 de octubre de 2026
+Nombre y apellido: Herrera
+DNI: 45098991
+Fecha: 10 de octubre de 2026
 
-## 1. Problema y elección de estructuras
+1. Problema y estructura de datos
 
-### 1.1 El problema
+Marta anota, de lunes a viernes, lo que se vende en el buffet de la Facultad. Entran dos grupos de datos. El catálogo trae el código, el nombre y el precio de cada producto. Cada venta trae el día, el código del producto y la cantidad. El programa acumula esas cantidades y al final de la semana muestra las unidades vendidas de cada producto, la recaudación de cada día, el producto más vendido, el día de mayor recaudación, los productos que no se vendieron y la recaudación total.
 
-Marta anota, de lunes a viernes, qué se vendió en el buffet. Entran dos grupos de datos: el catálogo (código, nombre y precio) y cada venta (día, código y cantidad). El programa acumula esas cantidades y al final de la semana informa unidades por producto, recaudación por día, el producto más vendido, el día de mayor recaudación, los productos sin ventas y el total de la semana.
+Elegí dos estructuras, porque los datos no cambian de la misma forma.
 
-### 1.2 Qué hay que guardar
+El catálogo es una lista de registros. Cada registro guarda juntos el código, el nombre y el precio. Así el precio del café no se puede mezclar con el nombre de otro producto. La otra opción era usar tres listas paralelas, una de códigos, una de nombres y una de precios. La descarté porque si se corre un índice, los datos de un producto quedan cruzados con los de otro.
 
-Casi no cambian: código, nombre y precio de cada producto. Cambian todos los días: la cantidad vendida de cada producto en cada día. Por eso el catálogo y las ventas no van en la misma estructura. El catálogo se carga una vez y las ventas se actualizan en cada registro.
+Las ventas son una matriz. Cada fila es un producto y cada columna es un día, de lunes a viernes. El total de un producto es la suma de su fila. La recaudación de un día se obtiene recorriendo esa columna y multiplicando cada cantidad por el precio. La otra opción era guardar una lista de ventas sueltas, por ejemplo “el martes, 25 cafés”. La descarté porque para sacar el total de un producto o de un día hay que recorrer toda la lista.
 
-### 1.3 Dos formas de guardar las ventas
+Esas dos estructuras se guardan en archivos de texto: productos.txt y ventas.txt. Si quedaran solo en memoria, al cerrar el programa se perdería la semana. Con los archivos, Marta puede cerrar a la tarde y al otro día seguir con lo ya cargado. Alcanza con leerlos de principio a fin, porque son pocos productos y cinco días.
 
-Opción A, una matriz de cantidades. Cada fila es un producto y cada columna es un día. El martes del cuaderno quedaría así:
+2. Diseño
 
-| Código | Lun | Mar | Mié | Jue | Vie |
-|---|---|---|---|---|---|
-| 101 | 0 | 25 | 0 | 0 | 0 |
-| 102 | 0 | 38 | 0 | 0 | 0 |
-| 103 | 0 | 12 | 0 | 0 | 0 |
-| 104 | 0 | 22 | 0 | 0 | 0 |
-| 105 | 0 | 0 | 0 | 0 | 0 |
-| 106 | 0 | 0 | 0 | 0 | 0 |
+El pseudocódigo está en buffet.psc. La lógica tiene tres momentos.
 
-Opción B, una lista de ventas sueltas. El martes serían cuatro registros: (2, 101, 25), (2, 102, 38), (2, 103, 12) y (2, 104, 22).
+Al abrir, el programa se fija si ya existen los archivos. Si no existen, es el primer día: carga el catálogo inicial de seis productos y deja la matriz de ventas en cero. Si existen, recupera el catálogo y las cantidades de la semana.
 
-Elegí la opción A. El total de un producto es la suma de su fila y el total de un día es la suma de su columna. En la opción B hay que recorrer toda la lista para cualquiera de los dos totales.
+Después entra a un menú que se repite mientras Marta no elija salir. Se usa un mientras, porque no se sabe cuántas operaciones va a hacer. Las opciones son registrar una venta, ver los informes, agregar un producto y salir.
 
-En el programa la matriz está guardada como un diccionario: la clave es el código y el valor es una lista de 5 cantidades. El acceso es directo por código y no se mezclan las filas si se agrega un producto.
+Cuando registra una venta, pide el día y el código. Recorre el catálogo hasta encontrar ese código. Si no está, avisa y no carga nada. Si está, pide la cantidad y la suma en la fila de ese producto y la columna de ese día. Si el mismo producto se anota otra vez el mismo día, no se borra lo anterior: se suma.
 
-### 1.4 Qué pasa si solo está en memoria
+Al salir, escribe los dos archivos. Por eso, la próxima vez que se abre, la semana sigue.
 
-Si Marta cierra el programa, la memoria se borra y al otro día la semana empieza vacía. Eso se resuelve con archivos de texto. Se guarda el catálogo completo y, para cada código, las 5 cantidades de la semana.
+3. Codificación
 
-### 1.5 Cómo guardar código, nombre y precio
+El programa está en buffet.py. El menú es un while, porque la cantidad de vueltas no se conoce de antemano. Para recorrer los productos y los días se usa for, porque ahí la cantidad sí se conoce. En buscar_producto el for corta con break cuando encuentra el código, así no sigue hasta el final si ya lo halló.
 
-Opción 1: tres listas paralelas (códigos, nombres y precios). Hay que cuidar que el índice 0 de las tres sea el mismo producto. Opción 2: una lista de registros, y cada registro tiene los tres datos juntos.
+Las funciones devuelven un valor. buscar_producto devuelve el registro o nada. unidades_producto devuelve la suma de la fila. recaudacion_dia devuelve la plata de un día. recaudacion_total devuelve la plata de la semana. productos_mas_vendidos, dias_mayor_recaudacion y productos_sin_ventas devuelven las listas que usa el informe. Si dos productos empatan, se muestran los dos. Lo mismo si empatan dos días.
 
-Elegí la opción 2. Un producto es un diccionario `{"codigo", "nombre", "precio"}`. No se puede desordenar el nombre de un producto respecto de su precio.
+Los procedimientos no devuelven nada. registrar_venta pide el día, el código y la cantidad, y suma. mostrar_informes imprime los cinco informes. agregar_producto suma un producto nuevo y no deja repetir el código. guardar_datos escribe los dos archivos.
 
-### 1.6 Archivos
+No hay listas globales. El catálogo y las ventas se crean en el programa principal y se pasan por parámetro. Los nombres de los archivos y el catálogo inicial están al principio porque no cambian durante la ejecución.
 
-Hacen falta dos:
+Con los datos del cuaderno, la cuenta hecha a mano da: café 138, medialuna 203, sándwich 54, agua 115, empanada 78 y chipá 0. La recaudación es lunes 129000, martes 107700, miércoles 129900, jueves 161100 y viernes 127200. El más vendido es la medialuna, con 203 unidades. El día de mayor recaudación es el jueves, con 161100. El chipá no se vende. El total de la semana es 654900.
 
-- `productos.txt`: archivo maestro del catálogo. Función: conservar código, nombre y precio.
-- `ventas.txt`: archivo de movimientos acumulados. Función: conservar las cantidades de la semana.
+El programa guarda después de cada venta y también al salir. Así no se pierde el día si se cierra mal. El archivo es chico, entonces escribirlo seguido no es un problema.
 
-Los dos se leen de principio a fin, así que alcanza con organización secuencial. No hace falta ir directo a un byte del archivo: son 6 productos y 5 días.
+4. Pruebas
 
-## 2. Diseño
+Las cuatro pruebas se ejecutaron en la Terminal con python3 buffet.py. Antes de las pruebas de primer día se borraron productos.txt y ventas.txt.
 
-### 2.1 Menú
+Prueba 1. Archivo inexistente.
+Entrada: abrir el programa sin los archivos.
+Esperado: aviso de primer día y carga del catálogo inicial.
+Obtenido: “Primer dia de uso: se carga el catalogo inicial” y “No habia ventas guardadas”.
+Coincide: sí.
+[Pegar acá la captura del menú recién abierto.]
 
-Marta elige con un menú: registrar una venta, ver informes, agregar un producto o salir. El menú está dentro de un `mientras`, porque no se sabe cuántas operaciones va a hacer. Un `para` no sirve: exigiría conocer la cantidad de vueltas antes de empezar.
+Prueba 2. Vacío.
+Entrada: opción 2, ver informes, sin ninguna venta cargada.
+Esperado: todas las unidades en 0, recaudación 0, sin producto más vendido y los seis productos sin ventas.
+Obtenido: el total de la semana fue 0 y el programa informó que no hay producto más vendido ni día de mayor recaudación.
+Coincide: sí.
+[Pegar acá la captura de los informes en cero.]
 
-### 2.2 Carga al arrancar
+Prueba 3. Dato duplicado.
+Entrada: el lunes, 30 cafés con leche (código 101) y después otros 5 cafés el mismo lunes.
+Esperado: no es un error. Las dos ventas se suman y quedan 35 cafés. El lunes recauda 35 x 1500 = 52500.
+Obtenido: “Cafe con leche: 35”, “lunes: 52500” y recaudación total 52500.
+Coincide: sí.
+[Pegar acá la captura del café en 35.]
 
-Al abrir, el programa intenta leer los dos archivos. Si no existen, es el primer día: carga el catálogo inicial de 6 productos y deja las ventas en cero. Si existen, recupera lo ya anotado y Marta sigue la semana.
+Prueba 4. Dato que puede romper el programa.
+Entrada: en el día se escribe “lunes” en vez de un número, y después el código 999, que no existe.
+Esperado: el programa no se cierra. Vuelve a pedir el día y avisa que el código no está.
+Obtenido: “Ingrese un numero entero” y “Ese codigo no esta en el catalogo”.
+Coincide: sí.
+[Pegar acá la captura del texto “lunes” y del código 999.]
 
-### 2.3 Procesamiento
+5. Reflexión
 
-Si anota 3 empanadas el miércoles, se busca el código 105 y se suma 3 en la posición del miércoles. Si ese mismo día vuelve a anotar empanadas, se suman a las que ya estaban. No se pisan.
+Descarté la lista de ventas sueltas porque obliga a recorrer todo cada vez que Marta pide el total de un producto o de un día. También descarté las tres listas paralelas para el catálogo, porque un índice corrido mezcla el nombre de un producto con el precio de otro.
 
-El total de un producto es la suma de sus 5 días. El total de un día es cantidad por precio de cada producto, sumados.
-
-### 2.4 Recuperación
-
-El jueves, al abrir, lee `productos.txt` y `ventas.txt` y vuelve a armar la lista de registros y la matriz. Lo del lunes, martes y miércoles sigue en esas filas.
-
-## 3. Codificación
-
-El programa está en `buffet.py`.
-
-### 3.1 Ciclos
-
-- `while` en el menú y al pedir un entero válido, porque la cantidad de intentos no se conoce.
-- `for` para recorrer productos y días, porque la cantidad sí se conoce.
-- En `buscar_producto` el `for` puede cortar antes del final con `break` cuando encuentra el código.
-
-### 3.2 Subprogramas
-
-Funciones, devuelven un valor:
-
-| Función | Recibe | Para qué |
-|---|---|---|
-| `buscar_producto` | la lista y un código | devolver el registro o nada |
-| `unidades_producto` | las ventas y un código | devolver la suma de la fila |
-| `recaudacion_dia` | productos, ventas y el día | devolver la plata de ese día |
-| `recaudacion_total` | productos y ventas | devolver la plata de la semana |
-| `productos_mas_vendidos` | productos y ventas | devolver la lista de los que empatan en el máximo |
-| `dias_mayor_recaudacion` | productos y ventas | devolver los días que empatan en recaudación |
-| `productos_sin_ventas` | productos y ventas | devolver los que están en cero |
-
-Procedimientos, no devuelven nada:
-
-| Procedimiento | Recibe | Para qué |
-|---|---|---|
-| `registrar_venta` | productos y ventas | pedir día, código y cantidad, y sumar |
-| `mostrar_informes` | productos y ventas | imprimir los 5 informes |
-| `agregar_producto` | productos y ventas | sumar un producto nuevo sin código repetido |
-| `guardar_datos` | productos y ventas | escribir los dos archivos |
-| `cargar_datos` | nada, lee los archivos | armar de nuevo las dos estructuras |
-
-`cargar_datos` devuelve las dos estructuras, así que funciona como función. Los otros cuatro de esa tabla son procedimientos.
-
-### 3.3 Variables globales
-
-No hay listas globales. Productos y ventas viven en `main` y se pasan por parámetro. Así una función no modifica otra cosa sin que se note. Los nombres de los archivos, los días y el catálogo inicial sí están arriba del programa, porque no cambian durante la ejecución. Pasarlos por parámetro en cada llamada alargaría el código sin ganar nada.
-
-### 3.4 Informes calculados a mano con el cuaderno
-
-Unidades: café 138, medialuna 203, sándwich 54, agua 115, empanada 78, chipá 0.
-
-Recaudación: lunes 129000, martes 107700, miércoles 129900, jueves 161100, viernes 127200.
-
-Más vendido: medialuna, 203 unidades. Día de mayor recaudación: jueves, 161100. Sin ventas: chipá. Total de la semana: 654900.
-
-Si dos productos empatan en unidades, se muestran los dos. Lo mismo si dos días empatan en plata. No se elige uno solo.
-
-### 3.5 Persistencia
-
-Se guarda después de cada venta, después de agregar un producto y también al salir. Guardar en cada venta evita perder el día si se corta la luz antes de elegir salir. El riesgo es que un error a mitad de la escritura deje el archivo a medias. Guardar solo al salir es más simple, pero se pierde todo lo del día si el programa se cierra mal. Elegí guardar en cada cambio porque el archivo es chico.
-
-## 4. Pruebas
-
-Los resultados de abajo salieron de ejecutar `buffet.py`.
-
-| N° | Entrada | Esperado | Obtenido | Coincide |
-|---|---|---|---|---|
-| 4.1 | Semana del cuaderno, cargada sobre las funciones del programa | Medialuna 203, jueves 161100, chipá sin ventas, total 654900 | Medialuna 203, jueves 161100, chipá sin ventas, total 654900 | Sí |
-| 4.2 | Abrir y pedir informes sin ventas | Todo en 0, sin producto más vendido, los 6 sin ventas, total 0 | El mismo mensaje | Sí |
-| 4.3 | Borrar los archivos y abrir | Aviso de primer día y catálogo inicial de 6 productos | Apareció "Primer dia de uso" y se crearon los archivos | Sí |
-| 4.4 | El lunes, 30 cafés y después otros 5 cafés | No es un error: quedan 35 cafés el lunes | El archivo quedó `101\|35\|0\|0\|0\|0` | Sí |
-| 4.5 | Poner "lunes" en lugar del número de día, y un código que no existe | No se cae el programa: vuelve a pedir el día y avisa código inexistente | Pidió otra vez el día y mostró "Ese codigo no esta en el catalogo" | Sí |
-
-Otra prueba de cierre: se registraron 30 cafés y 40 medialunas, se salió, se volvió a abrir y los informes seguían en 30 y 40. El lunes daba 73000, que es 30 × 1500 + 40 × 700.
-
-## 5. Reflexión
-
-### 5.1 Qué descarté
-
-Descarté la lista de ventas sueltas. Sirve para guardar el historial de cada anotación, pero para los informes de Marta obliga a recorrer todo cada vez. También descarté las tres listas paralelas para el catálogo, porque un índice corrido mezcla el precio de un producto con el nombre de otro.
-
-### 5.2 Ventajas y límites
-
-La matriz por código hace fáciles los totales por fila y por columna, y dos ventas del mismo producto el mismo día se suman solas. El límite aparece si el buffet abre los sábados: la lista deja de tener 5 posiciones y hay que tocar el alta, los archivos y los informes. Si agregan un producto a mitad de semana, el programa ya lo permite: se suma un registro y una fila de ceros, y no se pierden las ventas anteriores.
-
+La matriz por código hace fáciles esas dos cuentas, y dos ventas del mismo producto el mismo día se suman solas. El límite aparece si el buffet abre los sábados: la lista deja de tener cinco posiciones y hay que modificar la carga, los archivos y los informes. Si agregan un producto a mitad de semana, el programa ya lo permite: se suma un registro nuevo y una fila de ceros, sin perder las ventas anteriores.
