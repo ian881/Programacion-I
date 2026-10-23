@@ -2,7 +2,7 @@ Ian Herrera - DNI 45098991
 AE2 - Parte 1 de 4
 Seleccion de estructuras (antes del diseño)
 
-El catalogo lo guardo en una lista de registros. Cada producto tiene codigo, nombre y precio juntos, asi no se mezclan.
-Las ventas van en una matriz: cada fila es un producto y cada columna es un dia. Sumo la fila para el total de un producto y la columna para el dia.
-Los dos se guardan en archivos. Si quedan solo en memoria, al cerrar el programa se pierde la semana.
-No uso tres listas aparte (codigos, nombres y precios) ni una lista de ventas sueltas, porque despues cuesta mas sacar los totales.
+El catalogo va en una lista de registros: cada producto guarda juntos su codigo, nombre y precio, y asi no se mezclan.
+Las ventas van en una tabla de 6 productos por 5 dias. En Python es un diccionario: cada codigo tiene una lista con lo vendido de lunes a viernes.
+Uso una sola tabla y no cinco listas (una por dia), porque el total de un producto sale de una fila y el de un dia, de una columna.
+Todo se guarda en productos.txt y ventas.txt, porque si queda solo en memoria se pierde al cerrar el programa.
