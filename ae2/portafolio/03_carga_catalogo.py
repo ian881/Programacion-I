@@ -1,3 +1,7 @@
+# Ian Herrera - DNI 45098991
+# AE2 - Parte 3 de 4
+# Primer avance. Todavia no registra ventas ni informes.
+# Solo carga el catalogo y no deja repetir codigos.
 
 catalogo = []
 

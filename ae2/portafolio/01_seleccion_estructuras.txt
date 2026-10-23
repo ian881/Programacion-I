@@ -1,5 +1,8 @@
-Selección de estructuras, antes del diseño.
+Ian Herrera - DNI 45098991
+AE2 - Parte 1 de 4
+Seleccion de estructuras (antes del diseño)
 
-El catálogo va en una lista de registros, porque cada producto tiene código, nombre y precio juntos.
-Las ventas van en una matriz: cada fila es un producto y cada columna es un día, para sumar fácil un producto o un día.
+El catalogo lo guardo en una lista de registros. Cada producto tiene codigo, nombre y precio juntos, asi no se mezclan.
+Las ventas van en una matriz: cada fila es un producto y cada columna es un dia. Sumo la fila para el total de un producto y la columna para el dia.
 Los dos se guardan en archivos. Si quedan solo en memoria, al cerrar el programa se pierde la semana.
+No uso tres listas aparte (codigos, nombres y precios) ni una lista de ventas sueltas, porque despues cuesta mas sacar los totales.
