@@ -1,0 +1,7 @@
+# Instancia reducida del Anexo de resolución manual: subgrafo inducido por INV, ROB, ASG, RUT y SEG
+MOD;INV;ROB;ASG;RUT;SEG
+INV;0;1;0;0;0
+ROB;1;0;0;0;0
+ASG;1;0;0;1;0
+RUT;0;0;0;0;1
+SEG;0;0;1;0;0

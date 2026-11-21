@@ -1,0 +1,16 @@
+# G′ - Propuesta de reestructuración del equipo (Punto 3g)
+# Se incorpora BUS (bus de eventos) para romper las dos dependencias circulares:
+#   - Se quita ROB→INV: los robots ya no consultan Inventario; reciben los eventos de stock por BUS.
+#   - Se quita SEG→ASG: Seguimiento ya no consulta Asignación; recibe los eventos de asignación por BUS.
+#   - Se agregan INV→BUS, ROB→BUS, ASG→BUS y SEG→BUS (publican / se suscriben a eventos).
+MOD;PED;CLI;INV;ROB;ASG;RUT;SEG;ENT;REP;BUS
+PED;0;1;1;0;1;0;0;0;0;0
+CLI;0;0;0;0;0;0;0;0;0;0
+INV;0;0;0;1;0;0;0;0;0;1
+ROB;0;0;0;0;0;0;0;0;0;1
+ASG;0;0;1;0;0;1;0;0;0;1
+RUT;0;0;0;0;0;0;1;0;0;0
+SEG;0;0;0;0;0;0;0;0;0;1
+ENT;1;0;0;0;0;0;1;0;0;0
+REP;1;0;1;0;0;0;0;1;0;0
+BUS;0;0;0;0;0;0;0;0;0;0

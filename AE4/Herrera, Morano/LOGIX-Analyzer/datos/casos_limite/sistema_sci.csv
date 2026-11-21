@@ -1,0 +1,4 @@
+# Caso límite: sistema compatible indeterminado (la ecuación 2 es el doble de la 1)
+1;1;1;6
+2;2;2;12
+1;-1;0;0

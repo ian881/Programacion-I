@@ -1,0 +1,5 @@
+# Caso límite: Z3 no es alcanzable desde D
+ORIGEN;DESTINO;MINUTOS
+D;H1;5
+H1;Z1;3
+Z2;Z3;4

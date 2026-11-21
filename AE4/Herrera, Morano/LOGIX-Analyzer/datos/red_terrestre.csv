@@ -1,0 +1,12 @@
+# Tabla 5 - Red de distribución (grafo no dirigido ponderado, minutos de vehículo autónomo)
+# D: depósito central; H1, H2: centros de distribución; Z1, Z2, Z3: zonas de entrega
+ORIGEN;DESTINO;MINUTOS
+D;H1;8
+D;H2;5
+H1;H2;2
+H1;Z1;6
+H2;Z1;10
+H2;Z2;7
+Z1;Z2;3
+Z1;Z3;9
+Z2;Z3;4

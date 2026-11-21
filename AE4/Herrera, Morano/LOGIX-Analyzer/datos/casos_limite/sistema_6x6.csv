@@ -1,0 +1,7 @@
+# Caso límite: 6 ecuaciones (supera el máximo de 5; debe rechazarse)
+1;0;0;0;0;0;1
+0;1;0;0;0;0;1
+0;0;1;0;0;0;1
+0;0;0;1;0;0;1
+0;0;0;0;1;0;1
+0;0;0;0;0;1;1

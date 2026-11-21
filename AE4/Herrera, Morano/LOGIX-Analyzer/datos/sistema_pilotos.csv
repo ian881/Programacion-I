@@ -1,0 +1,6 @@
+# Tabla 6 - Paquetes piloto cotizados (miles de u.m.)
+# Incógnitas: x = unidad de análisis e ingeniería inversa; y = módulo reestructurado; z = integración
+# Cada línea: coeficiente de x ; coeficiente de y ; coeficiente de z ; precio total
+2;3;1;119
+1;2;2;122
+3;1;2;126

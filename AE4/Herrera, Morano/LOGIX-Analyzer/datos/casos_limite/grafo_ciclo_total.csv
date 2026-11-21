@@ -1,0 +1,6 @@
+# Caso límite: todos los módulos forman un único ciclo A→B→C→D→A (no admite orden de migración)
+MOD;A;B;C;D
+A;0;1;0;0
+B;0;0;1;0
+C;0;0;0;1
+D;1;0;0;0

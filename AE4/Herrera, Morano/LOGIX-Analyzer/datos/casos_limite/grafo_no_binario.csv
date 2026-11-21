@@ -1,0 +1,5 @@
+# Caso límite: un elemento vale 2 (debe rechazarse)
+MOD;A;B;C
+A;0;1;0
+B;0;0;2
+C;0;0;0

@@ -1,0 +1,4 @@
+# Caso límite: peso negativo (un tiempo de recorrido no puede ser negativo; debe rechazarse)
+ORIGEN;DESTINO;MINUTOS
+D;H1;5
+H1;Z1;-3

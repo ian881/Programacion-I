@@ -1,0 +1,13 @@
+# LOGIX - Digrafo de dependencias recuperado del código fuente (Tablas 1 y 2 de la consigna AE4)
+# Convención: a(i,j) = 1 si el módulo de la FILA i depende del módulo de la COLUMNA j
+# Orden obligatorio de la consigna: PED, CLI, INV, ROB, ASG, RUT, SEG, ENT, REP
+MOD;PED;CLI;INV;ROB;ASG;RUT;SEG;ENT;REP
+PED;0;1;1;0;1;0;0;0;0
+CLI;0;0;0;0;0;0;0;0;0
+INV;0;0;0;1;0;0;0;0;0
+ROB;0;0;1;0;0;0;0;0;0
+ASG;0;0;1;0;0;1;0;0;0
+RUT;0;0;0;0;0;0;1;0;0
+SEG;0;0;0;0;1;0;0;0;0
+ENT;1;0;0;0;0;0;1;0;0
+REP;1;0;1;0;0;0;0;1;0

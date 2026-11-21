@@ -1,0 +1,4 @@
+# Caso límite: el primer pivote es 0 (hay que tomar otra fila para el pivote). Solución: x=1, y=2, z=3
+0;1;1;5
+1;0;1;4
+1;1;0;3
